@@ -14,11 +14,11 @@ Usage
 ``` python
 import chart_vw
 
-# instantiate and clean
+# instantiate object and process data -> remove outliers, remove illogical responses
 obj = chart_vw.ChartObject(pricing_data_file_path = "../data/example_data.csv")
 
-# plot
-obj.plot(intersection="opp", title = "OPP Chart", chart_path = "../charts/example_chart.png"))
+# plot Optimal Price Point (OPP)
+obj.plot(intersection = "opp", title = "Social Media Subscription", chart_path = "../charts/example_chart.png"))
 ```
 
 Output
