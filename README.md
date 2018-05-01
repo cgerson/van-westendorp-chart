@@ -4,6 +4,11 @@ Summary
 -----
 Generate a Van Westendorp pricing chart with matplotlib. Plot Optimal Price Point (OPP) or Range of Acceptable Prices (RAI).
 
+Resources
+-----
+* 5 Circles Research: http://www.5circles.com/van-westendorp-pricing-the-price-sensitivity-meter/
+* driveresearch: https://www.driveresearch.com/single-post/2017/07/02/How-Does-the-van-Westendorp-Pricing-Model-Work
+
 Usage
 -----
 ``` python
