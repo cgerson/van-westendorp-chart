@@ -9,7 +9,8 @@ class ChartObject:
         
         self.pricing_data_file_path = pricing_data_file_path
         self.process_data()
-    
+        self.style = 'seaborn-darkgrid'
+
     def validate_file(self):
         
         # file should be a csv file
@@ -20,6 +21,7 @@ class ChartObject:
         return True
 
     def check_pricing_progression(self, row):
+        
         if row['cheap'] <= row['bargain'] <= row['getting expensive'] <= row['too expensive']:
             return True
         return False
@@ -54,7 +56,12 @@ class ChartObject:
         self.final_sample_size = len(self.final_df)
         print "size after removing illogical responses:", self.final_sample_size
 
-    def chart_data(self, intersection = "range", title = "Untitled", save_chart = False, annotate = False, PMC_coords = None, PME_coords = None):
+    def set_style(self, style):
+        
+        # options: ['seaborn-darkgrid', 'seaborn-notebook', 'classic', 'seaborn-ticks', 'grayscale', 'bmh', 'seaborn-talk', 'dark_background', 'ggplot', 'fivethirtyeight', 'seaborn-colorblind', 'seaborn-deep', 'seaborn-whitegrid', 'seaborn-bright', 'seaborn-poster', 'seaborn-muted', 'seaborn-paper', 'seaborn-white', 'seaborn-pastel', 'seaborn-dark', 'seaborn-dark-palette']
+        self.style = style
+
+    def plot(self, intersection = "range", title = "Untitled", chart_path = "pricing_chart.png", annotate = False, PMC_coords = None, PME_coords = None, OPP_coords = None):
 
         '''
         Parameters:
@@ -64,7 +71,7 @@ class ChartObject:
             > "opp": optimal price point. the columns "cheap" and "bargain" will be flipped
         * title: str, default 'Untitled'
         * annotate: boolean, default False
-        * save_file: boolean, default False
+        * chart_path: str, default "pricing_chart.png"
 
         '''
 
@@ -88,6 +95,10 @@ class ChartObject:
             self.final_df[cum_perc] = 100*self.final_df[cum_sum]/self.final_df[col].sum()
 
         # plot
+        plt.style.use(self.style)
+        from matplotlib import rcParams
+        rcParams['font.family'] = 'serif'
+
         fig, ax = plt.subplots(figsize=(12, 7))
         fig.suptitle("Price Sensitivity Meter: {0}".format(title), fontsize=16, ha='center')
 
@@ -101,24 +112,30 @@ class ChartObject:
 
         plt.title("\n{0} Responses".format(self.final_sample_size), fontsize=12, ha='center')
         plt.legend(loc='best', fontsize=14)
-        plt.xlabel("$ Price")
+        plt.xlabel("$ Price", fontsize=14)
         start, end = ax.get_xlim()
         plt.xticks(np.arange(start, end+1, 5.0))
         ax.set_ylim(ymin=0, ymax=100)
         vals = ax.get_yticks()
         ax.set_yticklabels(['{:1.0f}%'.format(x) for x in vals])
         
-        if intersection == "range" and annotate == True:
-            x,y = PMC_coords
-            ax.annotate('PMC', xy=PMC_coords, xytext=(x-4, y+5),
-                        arrowprops=dict(facecolor='black', shrink=0.05))
+        if annotate == True:
+            if intersection == "range":
+                x,y = PMC_coords
+                ax.annotate('PMC', xy=PMC_coords, xytext=(x-4, y+5),
+                            arrowprops=dict(facecolor='black', shrink=0.05))
 
-            x_1, y_1 = PME_coords
-            ax.annotate('PME', xy=PME_coords, xytext=(x_1+3, y_1+2),
-                        arrowprops=dict(facecolor='black', shrink=0.05))
+                x_1, y_1 = PME_coords
+                ax.annotate('PME', xy=PME_coords, xytext=(x_1+3, y_1+2),
+                            arrowprops=dict(facecolor='black', shrink=0.05))
 
-        if save_chart:
-            plt.savefig('../charts/pricing_chart.png', bbox_inches='tight')
+            if intersection == "opp":
+                x,y = OPP_coords
+                ax.annotate('OPP', xy=OPP_coords, xytext=(x-4, y-1),
+                            arrowprops=dict(facecolor='black', shrink=0.05))
+
+        if chart_path:
+            plt.savefig(chart_path, bbox_inches='tight')
         
         plt.show()
 
