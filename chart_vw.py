@@ -16,7 +16,7 @@ class ChartObject:
         # file should be a csv file
         assert "." in self.pricing_data_file_path, "Invalid file type"
         assert "csv" == self.pricing_data_file_path.split(".")[1], "Invalid file type"
-        assert os.path.exists("../data/{0}".format(self.pricing_data_file_path)) == True, "File not found"
+        assert os.path.exists(self.pricing_data_file_path) == True, "File not found"
 
         return True
 
@@ -30,7 +30,7 @@ class ChartObject:
 
         self.validate_file()
 
-        df = pd.read_csv("../data/{0}".format(self.pricing_data_file_path), index_col=None)
+        df = pd.read_csv(self.pricing_data_file_path, index_col=None)
         print "size:", len(df)
         print
 
