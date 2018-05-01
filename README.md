@@ -6,8 +6,7 @@ Generate a Van Westendorp pricing chart with matplotlib. Plot Optimal Price Poin
 
 Usage
 -----
-.. code-block:: python
-
+``` python
     import chart_vw
 
     # instantiate and clean
@@ -15,7 +14,6 @@ Usage
     
     # plot
     obj.plot(intersection="opp", title = "OPP Chart", chart_path = "example_chart.png"))
-
-
+```
 
 See "example_plot" notebook for a full demo.
