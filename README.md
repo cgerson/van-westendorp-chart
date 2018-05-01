@@ -17,7 +17,7 @@ import chart_vw
 # instantiate object and process data -> remove outliers, remove illogical responses
 obj = chart_vw.ChartObject(pricing_data_file_path = "../data/example_data.csv")
 
-# plot Optimal Price Point (OPP)
+# plot Optimal Price Point (OPP) and save file to chart_path
 obj.plot(intersection = "opp", title = "Social Media Subscription", chart_path = "../charts/example_chart.png"))
 ```
 
