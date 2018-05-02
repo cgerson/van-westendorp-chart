@@ -77,6 +77,9 @@ class ChartObject:
         * title: str, default 'Untitled'
         * annotate: boolean, default False
         * chart_path: str, default "pricing_chart.png"
+        * OPP_coords: tuple, coordinates where OPP is found to annotate chart. Will display if annotate == True
+        * PMC_coords: tuple, coordinates where PMC is found to annotate chart. Will display if annotate == True
+        * PME_coords: tuple, coordinates where PME is found to annotate chart. Will display if annotate == True
 
         '''
 
