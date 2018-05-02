@@ -99,7 +99,7 @@ class ChartObject:
         from matplotlib import rcParams
         rcParams['font.family'] = 'serif'
 
-        fig, ax = plt.subplots(figsize=(12, 7))
+        fig, ax = plt.subplots(figsize=(14, 9))
         
         fig.suptitle("Van Westendorp Price Sensitivity Meter: {0}".format(title), fontsize=16, ha='center')
 
