@@ -18,12 +18,13 @@ import chart_vw
 obj = chart_vw.ChartObject(pricing_data_file_path = "../data/example_data.csv")
 
 # plot Optimal Price Point (OPP) and save file to chart_path
-obj.plot(intersection = "opp", title = "Social Media Subscription", chart_path = "../charts/example_chart.png"))
+obj.plot(intersection="opp", title = "Example", chart_path= "../charts/example_chart.png", 
+         annotate=True, OPP_coords=(12,29))
 ```
 
 Output
 ------
-![Chart](https://github.com/cgerson/van-westendorp-chart/blob/master/charts/pricing_chart.png)
+![Chart](https://github.com/cgerson/van-westendorp-chart/blob/master/charts/example_chart.png)
 
 
 More details
