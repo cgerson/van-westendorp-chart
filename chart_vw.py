@@ -3,6 +3,8 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
+# NOTE: ChartObject expects a CSV in which four fields contain one of the following strings in its name: 'cheap','bargain','getting expensive', 'too expensive'. See "example_data.csv" for an example.
+
 class ChartObject:
 
     def __init__(self, pricing_data_file_path):
@@ -38,7 +40,10 @@ class ChartObject:
         cols = ['cheap','bargain','getting expensive', 'too expensive']
         cols_mapping = {}
         for col in cols:
-            k = filter(lambda x: col in x, df.columns)[0]
+            try:
+                k = filter(lambda x: col in x, df.columns)[0]
+            except IndexError:
+                print "Data must have four columns containing the following strings respectively: 'cheap','bargain','getting expensive', 'too expensive'\n\nPlease rename columns and try again." 
             cols_mapping[k] = col
         df.rename(columns = cols_mapping, inplace=True)
         
