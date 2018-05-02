@@ -15,7 +15,7 @@ class ChartObject:
         
         # file should be a csv file
         assert "." in self.pricing_data_file_path, "Invalid file type"
-        assert "csv" == self.pricing_data_file_path.split(".")[1], "Invalid file type"
+        assert "csv" == self.pricing_data_file_path.split(".")[-1], "Invalid file type"
         assert os.path.exists(self.pricing_data_file_path) == True, "File not found"
 
         return True
@@ -100,7 +100,8 @@ class ChartObject:
         rcParams['font.family'] = 'serif'
 
         fig, ax = plt.subplots(figsize=(12, 7))
-        fig.suptitle("Price Sensitivity Meter: {0}".format(title), fontsize=16, ha='center')
+        
+        fig.suptitle("Van Westendorp Price Sensitivity Meter: {0}".format(title), fontsize=16, ha='center')
 
         for i, col in enumerate(cols):
             cum_perc = "{0}_cum_perc".format(col)
@@ -120,19 +121,20 @@ class ChartObject:
         ax.set_yticklabels(['{:1.0f}%'.format(x) for x in vals])
         
         if annotate == True:
-            if intersection == "range":
+            if PMC_coords:
                 x,y = PMC_coords
-                ax.annotate('PMC', xy=PMC_coords, xytext=(x-4, y+5),
+                ax.annotate('PMC', xy=PMC_coords, xytext=(x-4, y+5), size=14, weight='bold',
                             arrowprops=dict(facecolor='black', shrink=0.05))
 
+            if PME_coords:  
                 x_1, y_1 = PME_coords
-                ax.annotate('PME', xy=PME_coords, xytext=(x_1+3, y_1+2),
+                ax.annotate('PME', xy=PME_coords, xytext=(x_1+3, y_1+2), size=14, weight='bold',
                             arrowprops=dict(facecolor='black', shrink=0.05))
 
-            if intersection == "opp":
-                x,y = OPP_coords
-                ax.annotate('OPP', xy=OPP_coords, xytext=(x-4, y-1),
-                            arrowprops=dict(facecolor='black', shrink=0.05))
+            if OPP_coords:
+                x_2, y_2 = OPP_coords
+                ax.annotate('OPP', xy=OPP_coords, xytext=(x_2-13, y_2-1), size=14, weight='bold',
+                            arrowprops=dict(facecolor='black', arrowstyle='simple'))
 
         if chart_path:
             plt.savefig(chart_path, bbox_inches='tight')
