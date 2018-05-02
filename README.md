@@ -8,6 +8,8 @@ Resources
 -----
 * 5 Circles Research: http://www.5circles.com/van-westendorp-pricing-the-price-sensitivity-meter/
 * driveresearch: https://www.driveresearch.com/single-post/2017/07/02/How-Does-the-van-Westendorp-Pricing-Model-Work
+* Nufer Marketing Research: http://www.nufermr.com/the-price-is-right-using-the-van-westendorp-price-sensitivity-analysis-to-help-set-price/
+* MedPanel: http://www.medpanel.com/van-westendorp-price-sensitivity-meter/
 
 Usage
 -----
